@@ -1,6 +1,9 @@
+using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +23,29 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
+//builder.Services.AddCors();
+// 1. Add the CORS service and define a policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200", // client origin
+                                             "https://localhost:4200")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
+
+
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+//app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+//.WithOrigins("http;//localhost:4200","https;//localhost:4200"));
+
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
@@ -32,6 +57,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
 
 app.MapControllers();
 
