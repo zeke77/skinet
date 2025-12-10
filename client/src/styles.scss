@@ -15,6 +15,27 @@
    ));
 }
 
-.match-input-height {
-  height: var(--mat-form-field-container-height) !important;
+// .match-input-height {
+//   height: var(--mat-form-field-container-height) !important;
+// }
+
+.mdc-notched-outline__notch {
+
+  border-right-style: none !important
+}
+.input-button-group .match-input-height {
+  height: 56px;               /* Match mat-form-field outline height */
+  display: flex;
+  align-items: center;        /* Center icon + text vertically */
+  padding: 0 16px;            /* Keep default horizontal padding */
+}
+
+.input-button-group mat-form-field {
+  height: 56px;
+}
+
+.input-button-group mat-form-field .mat-mdc-text-field-wrapper {
+  height: 56px;
+  display: flex;
+  align-items: center;
 }

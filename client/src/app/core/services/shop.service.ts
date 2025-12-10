@@ -69,6 +69,12 @@ if (shopParams.search)
   return this.http.get<Pagination<Product>>(this.baseUrl + this.pageRequest,{params});
  }
 
+getProduct(id: number)
+{
+  const request = this.baseUrl + this.pageRequest + '/' + id;
+  return this.http.get<Product>(request);
+}
+
 getBrands() {
 
   if ( this.brands.length > 0 ) return;

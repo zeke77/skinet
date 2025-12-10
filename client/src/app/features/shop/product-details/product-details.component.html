@@ -1,0 +1,64 @@
+
+<!-- @if (product(); as p) {
+  <h1 class="text-2xl">{{ p.name }}</h1>
+}
+@else
+{
+  <p>product loading details</p>
+  <button mat-stroked-button (click)="loadProduct()">Try Again</button>
+} -->
+
+@if (product(); as p) {
+
+  <section class="py-8">
+
+<div class="max-w-screen-2xl px-4 mx-auto">
+
+  <div class="grid grid-cols-2 gap-8 ">
+
+<div class="max-w-xl mx-auto">
+  <img src="{{ p.pictureUrl }}" alt="product image" class="w-full">
+</div>
+
+<div>
+  <h1 class="text-2xl font-semibold test-gray-900">{{p.name}}</h1>
+  <div class="mt-4 item-center gap-4 flex">
+
+    <p class="text-3xl font-extrabold text-gray-900">
+      {{p.price | currency}}
+
+    </p>
+  </div>
+
+<div class="flex gap-4 mt-6 mb-6 input-button-group">
+
+  <button mat-flat-button class="match-input-height">
+  <mat-icon>shopping_cart</mat-icon>
+  Add to cart
+</button>
+
+<mat-form-field appearance="outline" class="flex">
+<mat-label>Quantity</mat-label>
+<input matInput type="number">
+</mat-form-field>
+
+</div>
+<mat-divider ></mat-divider>
+
+<p class="mt-6 text-gray-500">
+  {{p.description}}
+</p>
+
+</div>
+
+  </div> 
+
+
+
+</div>
+
+
+
+
+  </section>
+}
