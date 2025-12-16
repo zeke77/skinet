@@ -39,3 +39,19 @@
   display: flex;
   align-items: center;
 }
+
+.snack-error {
+  @include mat.snack-bar-overrides((
+  button-color: black,
+  container-color: orange,
+  supporting-text-color: black
+  ));
+}
+
+.snack-success {
+  @include mat.snack-bar-overrides((
+  button-color: white,
+  container-color: green,
+  supporting-text-color: white
+  ));
+}
